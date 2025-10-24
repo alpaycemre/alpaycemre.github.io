@@ -6,11 +6,6 @@
   <title>Alpay Cemre Çam — Game Developer</title>
   <meta name="description" content="Alpay Cemre Çam — Unity mobile game developer portfolio" />
 
-  <!-- Simple, dependency-free responsive portfolio template
-       - Değiştirmeniz gerekenler: /assets/game1.png, /assets/game2.png, metinleri
-       - CV için link: #download-cv veya kendi url'nizle değiştirin
-  -->
-
   <style>
     :root{
       --bg: #0f1720;
@@ -96,6 +91,40 @@
     .cv-link{display:inline-block;margin-top:10px}
   </style>
 </head>
+<!-- Lightbox Container -->
+<div id="lightbox" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;">
+  <img id="lightbox-img" src="" alt="Expanded Screenshot" style="
+    max-width:90%;
+    max-height:90%;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(255,255,255,0.3);">
+</div>
+
+<script>
+  const images = document.querySelectorAll('img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      lightbox.style.display = 'flex';
+      lightboxImg.src = img.src;
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+</script>
+
 <body>
   <div class="wrap">
     <header>

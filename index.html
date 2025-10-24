@@ -1,39 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alpay Cemre Çam - Game Developer Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alpay Cemre Çam — Game Developer</title>
+  <meta name="description" content="Alpay Cemre Çam — Unity mobile game developer portfolio" />
+
+  <!-- Simple, dependency-free responsive portfolio template
+       - Değiştirmeniz gerekenler: /assets/game1.png, /assets/game2.png, metinleri
+       - CV için link: #download-cv veya kendi url'nizle değiştirin
+  -->
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      text-align: center;
-      padding: 40px;
+    :root{
+      --bg: #0f1720;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #7c3aed;
+      --glass: rgba(255,255,255,0.03);
+      --max-width: 980px;
+      color-scheme: dark;
+      color: #e6eef6;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    h1 {
-      color: #222;
+
+    /* Light theme support (toggle via .light on body) */
+    body.light{
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --muted: #475569;
+      --accent: #5b21b6;
+      --glass: rgba(0,0,0,0.03);
+      color-scheme: light;
+      color: #0b1220;
     }
-    img {
-      width: 300px;
-      border-radius: 12px;
-      margin: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 500px at 10% 10%, rgba(124,58,237,0.06), transparent), var(--bg);
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:36px 20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
+
+    .wrap{width:100%;max-width:var(--max-width);}
+    header{
+      display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:28px;
+    }
+    .brand{display:flex;gap:14px;align-items:center}
+    .avatar{
+      width:68px;height:68px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:white;box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+    h1{margin:0;font-size:20px}
+    p.lead{margin:4px 0 0;font-size:13px;color:var(--muted)}
+
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{padding:10px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;border:none}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:26px}
+
+    .hero{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+
+    .card{background:var(--card);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .screenshot{width:100%;height:420px;object-fit:cover;border-radius:10px;margin-bottom:8px;cursor:pointer}
+    .meta{display:flex;align-items:center;justify-content:space-between}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:var(--glass);}
+    .desc{font-size:13px;color:var(--muted);margin-top:6px}
+
+    aside{position:relative}
+    .panel{position:sticky;top:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .techs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .tech{padding:6px 8px;border-radius:8px;background:var(--glass);font-size:13px}
+
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:1000px){main{grid-template-columns:1fr} .screenshot{height:320px}}
+    @media (max-width:560px){.screenshot{height:220px} header{flex-direction:column;align-items:flex-start} .actions{width:100%;justify-content:space-between}}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+    .modal.open{display:flex}
+    .modal .inner{max-width:900px;width:95%;}
+    .modal img{width:100%;height:auto;border-radius:10px}
+
+    /* small helper */
+    .cv-link{display:inline-block;margin-top:10px}
   </style>
 </head>
 <body>
-  <h1>🎮 Alpay Cemre Çam</h1>
-  <h2>Unity Game Developer</h2>
-  <p>Hello! I'm Alpay, a computer engineer who develops mobile games with Unity and wants to develop and work in this field.<br>
-  Below you can see some of the games I have made.</p>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="avatar">AC</div>
+        <div>
+          <h1>Alpay Cemre Çam</h1>
+          <p class="lead">Unity · C# · Mobile Games · Gameplay & UI</p>
+        </div>
+      </div>
 
-  <h3>🕹️ My Games</h3>
-  <img src="https://via.placeholder.com/300x600.png?text=Game+1+Screenshot" alt="Game 1">
-  <img src="https://via.placeholder.com/300x600.png?text=Game+2+Screenshot" alt="Game 2">
+      <div class="actions">
+        <button class="btn" id="theme-toggle" title="Toggle light/dark">🌗</button>
+        <a class="btn primary" id="download-cv" href="#">Download CV</a>
+      </div>
+    </header>
 
-  <p>📧 <a href="mailto:alpaycemrecam@hotmail.com">alpaycemrecam@hotmail.com</a> | 
-  <a href="https://www.linkedin.com/in/alpaycemrecam/">LinkedIn</a></p>
+    <main>
+      <section class="hero">
+        <h2>Projects</h2>
+        <p class="desc">Below are a selection of my mobile game projects. I've included a brief description, gameplay notes, and screenshots for each project. Click on the image to view it in full size.</p>
+
+        <div class="grid" style="margin-top:12px">
+
+          <!-- Hanging Balls -->
+          <article class="card">
+            <img class="screenshot" src="/assets/hanging-balls1.jpg" alt="Hanging Balls Screenshot" data-title="Hanging Balls" />
+            <div class="meta">
+              <div>
+                <strong>Hanging Balls</strong>
+                <div class="desc">A simple drag-and-match game. Balls explode by damaging the blocks they hit according to the number of balls they match of the same color.</div>
+              </div>
+              <div class="tag">Unity C# Mobile</div>
+            </div>
+            <p class="desc">A prototype developed in one month.</p>
+          </article>
+
+          <!-- Boss Clicker -->
+          <article class="card">
+            <img class="screenshot" src="/assets/boss-clicker1.jpg" alt="Boss Clicker Screenshot" data-title="Boss Clicker" />
+            <div class="meta">
+              <div>
+                <strong>Boss Clicker</strong>
+                <div class="desc">An Idle game with various mechanics such as Tap, Upgrade, Spawn, Sell, Hero Class, Auto Attack, Merge, Prestige.</div>
+              </div>
+              <div class="tag">Unity C# Mobile</div>
+            </div>
+            <p class="desc">Quite open to development.</p>
+          </article>
+
+        </div>
+
+        <h3 style="margin-top:16px">Video / GIF</h3>
+        <p class="desc">Not available yet.</p>
+
+      </section>
+
+      <aside>
+        <div class="panel">
+          <h3>About me</h3>
+          <p class="desc">Computer Engineer. Experience in mobile game development with Unity, game mechanics, UI/UX and optimization.</p>
+
+          <h4 style="margin-top:12px">Tech & Tools</h4>
+          <div class="techs">
+            <div class="tech">Unity</div>
+            <div class="tech">C#</div>
+            <div class="tech">Git</div>
+            <div class="tech">Phaser.js</div>
+			<div class="tech">RPG Maker</div>
+          </div>
+
+          <h4 style="margin-top:12px">Contact</h4>
+          <p class="desc">📧 <a href="mailto:alpaycemrecam@hotmail.com">alpaycemrecam@hotmail.com</a></p>
+          <p class="desc">🔗 <a href="https://www.linkedin.com/in/alpaycemrecam/" target="_blank">LinkedIn</a></p>
+
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>Made with love - Alpay Cemre Çam</p>
+    </footer>
+
+  </div>
+
+  <!-- Modal for large screenshots -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="inner">
+      <img id="modal-img" src="" alt="" />
+      <p id="modal-title" style="text-align:center;margin-top:8px;color:var(--muted)"></p>
+    </div>
+  </div>
+
+  <script>
+    // Screenshot modal
+    document.querySelectorAll('.screenshot').forEach(img => {
+      img.addEventListener('click', () => {
+        const modal = document.getElementById('modal');
+        document.getElementById('modal-img').src = img.src;
+        document.getElementById('modal-img').alt = img.alt || '';
+        document.getElementById('modal-title').textContent = img.dataset.title || '';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+      });
+    });
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if(e.target.id === 'modal' || e.target.id === 'modal-img'){
+        e.currentTarget.classList.remove('open');
+        e.currentTarget.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // Theme toggle (persists to localStorage)
+    const btn = document.getElementById('theme-toggle');
+    const body = document.body;
+    const saved = localStorage.getItem('theme');
+    if(saved === 'light') body.classList.add('light');
+    btn.addEventListener('click', () => {
+      body.classList.toggle('light');
+      localStorage.setItem('theme', body.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Download CV link (change href to your CV file in repo e.g. /assets/AlpayCV.pdf)
+    document.getElementById('download-cv').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open('/assets/AlpayCV.pdf', '_blank');
+    });
+  </script>
 </body>
 </html>
